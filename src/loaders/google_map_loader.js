@@ -1,10 +1,12 @@
-const BASE_URL = 'https://maps';
-const DEFAULT_URL = `${BASE_URL}.googleapis.com`;
+const DEFAULT_URL = 'https://maps.googleapis.com';
+const REGIONAL_URLS = {
+  cn: 'http://www.google.cn', // HTTPS is not available in China
+};
 const API_PATH = '/maps/api/js?callback=_$_google_map_initialize_$_';
 
 const getUrl = region => {
-  if (region && region.toLowerCase() === 'cn') {
-    return `${BASE_URL}.google.cn`;
+  if (region && REGIONAL_URLS[region.toLowerCase()]) {
+    return REGIONAL_URLS[region.toLowerCase()];
   }
   return DEFAULT_URL;
 };
